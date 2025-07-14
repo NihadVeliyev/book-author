@@ -1,8 +1,10 @@
 package az.edu.turing.bookauthor.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
+@Data
 @Entity
 public class Author {
     @Id
@@ -14,6 +16,6 @@ public class Author {
     private  String email;
 
     @OneToMany(mappedBy = "author")
-    private List<Book> books; // one author → many books
+    private List<Book> books;
 
 }

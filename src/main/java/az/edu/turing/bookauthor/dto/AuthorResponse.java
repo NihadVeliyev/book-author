@@ -6,4 +6,6 @@ public class AuthorResponse {
     private String name;
 
     private  String email;
+
+    private BookResponse book;
 }

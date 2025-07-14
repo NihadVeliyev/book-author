@@ -1,8 +1,9 @@
 package az.edu.turing.bookauthor.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
-
+@Data
 @Entity
 public class Book {
     @Id
