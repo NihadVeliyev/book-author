@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,21 +29,24 @@ public class AuthorServiceImpl implements AuthorService {
                     existingAuthor.setBooks(updatedAuthor.getBooks());
                     return authorRepository.save(existingAuthor);
                 })
-                .orElse(null); // Or throw new EntityNotFoundException
+                .orElse(null); 
     }
 
     @Override
     public void deleteAuthor(Long id) {
+        authorRepository.deleteById(id);
 
     }
 
     @Override
-    public List<Author> getAllAuthors(Author author) {
-        return List.of();
+    public List<Author> getAllAuthors() {
+
+        return authorRepository.findAll();
     }
 
     @Override
-    public Author findById(Long id) {
-        return null;
+    public Optional<Author> findById(Long id) {
+
+        return authorRepository.findById(id);
     }
 }
