@@ -23,7 +23,7 @@ public class AuthorController {
         return authorService.getAllAuthors();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/authors/{id}")
     public ResponseEntity<Author> findById(@PathVariable Long id) {
         return authorService.findById(id)
                 .map(ResponseEntity::ok)
@@ -31,14 +31,14 @@ public class AuthorController {
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/authors/{id}")
     public ResponseEntity<Void> deleteAuthor(@PathVariable Long id) {
         authorService.deleteAuthor(id);
         return ResponseEntity.noContent().build();
 
     }
 
-    @PutMapping("/{id")
+    @PutMapping("/authors/{id")
     public ResponseEntity<Author> updateAuthor(@PathVariable Long id, @RequestBody Author updatedAuthor) {
         Author existingAuthor = authorService.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Author  not found with id:" + id));
@@ -49,7 +49,7 @@ public class AuthorController {
         return ResponseEntity.ok(savedAuthor);
     }
 
-    @PostMapping
+    @PostMapping("/authors")
     public ResponseEntity<Author> createAuthor(@RequestBody Author author) {
         Author createdAuthor = authorService.createAuthor(author);
         return ResponseEntity.status(201).body(createdAuthor);
@@ -60,12 +60,3 @@ public class AuthorController {
 }
 
 
-
-
-
-
-
-    
-
-
-}
