@@ -6,6 +6,7 @@ import az.edu.turing.bookauthor.model.Book;
 import az.edu.turing.bookauthor.service.BookService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.constraintvalidators.RegexpURLValidator;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookController {
     public final BookService bookService;
+    private final RegexpURLValidator regexpURLValidator;
 
     @GetMapping("/books")
     public List<Book> getAllBooks(){
@@ -45,6 +47,13 @@ public class BookController {
 
         Book savedBook = bookService.updateBook(id, updatedBook);
         return ResponseEntity.ok(savedBook);
+    }
+
+    @DeleteMapping("/books/{id}")
+    public ResponseEntity<Void> deleteBook(@PathVariable Long id){
+        bookService.deleteBook(id);
+        return ResponseEntity.noContent().build();
+
     }
 
 
