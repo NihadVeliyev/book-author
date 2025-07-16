@@ -1,8 +1,10 @@
 package az.edu.turing.bookauthor.controller;
 
 
+import az.edu.turing.bookauthor.exceptions.ResourceNotFoundException;
 import az.edu.turing.bookauthor.model.Book;
 import az.edu.turing.bookauthor.service.BookService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +37,16 @@ public class BookController {
 
 
     }
+
+    @PutMapping("/books/{id}")
+    public ResponseEntity<Book> updateBook(
+            @PathVariable Long id,
+            @RequestBody Book updatedBook) {
+
+        Book savedBook = bookService.updateBook(id, updatedBook);
+        return ResponseEntity.ok(savedBook);
+    }
+
 
 
 

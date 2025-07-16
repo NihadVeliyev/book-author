@@ -1,5 +1,6 @@
 package az.edu.turing.bookauthor.service.impl;
 
+import az.edu.turing.bookauthor.exceptions.ResourceNotFoundException;
 import az.edu.turing.bookauthor.model.Book;
 import az.edu.turing.bookauthor.repository.BookRepository;
 import az.edu.turing.bookauthor.service.BookService;
@@ -29,7 +30,8 @@ public class BookServiceImpl implements BookService {
                     existingBook.setTitle(updatedBook.getTitle());
                     return bookRepository.save(existingBook);
                 })
-                .orElse(null);
+                .orElseThrow(() -> new ResourceNotFoundException("Book not found with id: " + id));
+
     }
 
     @Override
