@@ -5,12 +5,8 @@ import az.edu.turing.bookauthor.model.Author;
 import az.edu.turing.bookauthor.service.AuthorService;
 import az.edu.turing.bookauthor.service.impl.AuthorServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.transaction.ExecutionListenersTransactionManagerCustomizer;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
-import org.springframework.data.auditing.AuditingHandler;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -52,6 +48,13 @@ public class AuthorController {
         Author savedAuthor = authorService.createAuthor(existingAuthor);
         return ResponseEntity.ok(savedAuthor);
     }
+
+    @PostMapping
+    public ResponseEntity<Author> createAuthor(@RequestBody Author author) {
+        Author createdAuthor = authorService.createAuthor(author);
+        return ResponseEntity.status(201).body(createdAuthor);
+    }
+
 
 
 }
